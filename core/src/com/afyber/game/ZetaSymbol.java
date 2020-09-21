@@ -24,8 +24,8 @@ public class ZetaSymbol extends Game {
 	public static InputHandling handler;
 
 	// just for use globally to store overworld position in-between battles
-	public int overworldx;
-	public int overworldy;
+	public int overworldX;
+	public int overworldY;
 
 	public static final int SCREEN_WIDTH = 200;
 	public static final int SCREEN_HEIGHT = 200;
@@ -48,5 +48,6 @@ public class ZetaSymbol extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		font.dispose();
 	}
 }

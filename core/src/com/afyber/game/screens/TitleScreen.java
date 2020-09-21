@@ -1,26 +1,16 @@
 package com.afyber.game.screens;
 
 import com.afyber.game.ZetaSymbol;
+import com.afyber.game.api.MyScreenAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class TitleScreen extends ScreenAdapter {
-    ZetaSymbol game;
-
-    Viewport viewport;
-    OrthographicCamera camera;
+public class TitleScreen extends MyScreenAdapter {
 
     public TitleScreen(ZetaSymbol game) {
-        this.game = game;
+        super(game);
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, ZetaSymbol.SCREEN_WIDTH, ZetaSymbol.SCREEN_HEIGHT);
-        viewport = new ScalingViewport(Scaling.stretch, ZetaSymbol.WINDOW_WIDTH, ZetaSymbol.WINDOW_HEIGHT);
+        setupScreen();
 
         Gdx.input.setInputProcessor(ZetaSymbol.handler);
     }
@@ -30,8 +20,7 @@ public class TitleScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        game.batch.setProjectionMatrix(camera.combined);
+        updateScreen();
 
         game.batch.begin();
 

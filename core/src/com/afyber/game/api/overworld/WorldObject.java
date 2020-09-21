@@ -1,10 +1,10 @@
 package com.afyber.game.api.overworld;
 
 public class WorldObject {
-    public int worldpos[];
+    public int worldPos[];
 
     public WorldObject(int x, int y) {
-        worldpos[0] = x;
-        worldpos[1] = y;
+        worldPos[0] = x;
+        worldPos[1] = y;
     }
 }

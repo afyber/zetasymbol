@@ -9,6 +9,7 @@ public class InputHandling implements InputProcessor {
     public int[] keyCodes;
 
     public InputHandling() {
+        // TODO: configurable input
         keyCodes = new int[7];
         keyCodes[0] = Input.Keys.LEFT;
         keyCodes[1] = Input.Keys.RIGHT;

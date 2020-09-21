@@ -8,5 +8,5 @@ public class Overworld {
     public Tile[] tiles;
     public Collision[] collisions;
 
-    public int[] monsterencounterids;
+    public int[] monsterEncounterIDs;
 }
