@@ -1,6 +1,7 @@
 package com.afyber.game.api.overworld;
 
 import com.afyber.game.api.Direction;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 // TODO
 public class CameraLimit extends WorldObject {
@@ -11,5 +12,10 @@ public class CameraLimit extends WorldObject {
     public CameraLimit(int x, int y, Direction type) {
         super(x, y);
         this.type = type;
+    }
+
+    @Override
+    public void render(SpriteBatch batch, int cameraX, int cameraY) {
+        // none, should be invisible
     }
 }
