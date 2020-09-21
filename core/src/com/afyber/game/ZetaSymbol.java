@@ -27,10 +27,10 @@ public class ZetaSymbol extends Game {
 	public int overworldX;
 	public int overworldY;
 
-	public static final int SCREEN_WIDTH = 200;
-	public static final int SCREEN_HEIGHT = 200;
-	public static final int WINDOW_WIDTH = 600;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final int SCREEN_WIDTH = 160;
+	public static final int SCREEN_HEIGHT = 144;
+	public static final int WINDOW_WIDTH = 640;
+	public static final int WINDOW_HEIGHT = 576;
 
 	public static final String WINDOW_TITLE = "zetasymbol";
 	

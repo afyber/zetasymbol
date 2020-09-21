@@ -34,7 +34,7 @@ public class OverworldScreen extends MyScreenAdapter {
 
         // TODO
         world.render(game.batch);
-        game.font.draw(game.batch, "test", 50f, 150f);
+        game.font.draw(game.batch, "test", 50f, 100f);
 
         game.batch.end();
 

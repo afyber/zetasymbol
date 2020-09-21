@@ -24,7 +24,7 @@ public class TitleScreen extends MyScreenAdapter {
 
         game.batch.begin();
 
-        game.font.draw(game.batch, ZetaSymbol.WINDOW_TITLE, 50f, 150f);
+        game.font.draw(game.batch, ZetaSymbol.WINDOW_TITLE, 50f, 100f);
 
         game.batch.end();
 

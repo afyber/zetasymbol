@@ -9,6 +9,7 @@ public class TileTextureRegions {
     private static Texture tileSet;
 
     // the tile order is left to right, top to bottom (in the image file)
+    // the direction is the direction towards where the player can walk (the north wall stops you from moving down)
     // 0 : NW outer corner
     // 1 : N wall
     // 2 : NE outer corner

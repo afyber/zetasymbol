@@ -16,7 +16,7 @@ public class LoadSave {
         world.tiles[5] = new Tile(0, 16, TileTextureRegions.getRegionForDirection(TileDirection.EAST));
 
         world.player.worldPos[0] = 100;
-        world.player.worldPos[1] = 150;
+        world.player.worldPos[1] = 100;
     }
 
     public static void save(Overworld world) {
