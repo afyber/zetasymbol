@@ -1,12 +1,12 @@
 package com.afyber.game.api.overworld;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class WorldObject {
     public int[] worldPos;
 
-    public Texture sprite;
+    public TextureRegion sprite;
 
     public WorldObject(int x, int y) {
         worldPos = new int[2];
