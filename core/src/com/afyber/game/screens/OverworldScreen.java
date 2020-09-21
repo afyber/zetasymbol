@@ -18,7 +18,7 @@ public class OverworldScreen extends MyScreenAdapter {
         super(game);
 
         world = new Overworld();
-        LoadSave.load(world, levelID);
+        LoadSave.load(world, levelID, 0);
 
         setupScreen();
     }
