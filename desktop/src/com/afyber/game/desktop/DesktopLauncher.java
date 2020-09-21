@@ -11,6 +11,8 @@ public class DesktopLauncher {
 		config.width = ZetaSymbol.WINDOW_WIDTH;
 		config.height = ZetaSymbol.WINDOW_HEIGHT;
 		config.title = ZetaSymbol.WINDOW_TITLE;
+		config.foregroundFPS = 60;
+		config.backgroundFPS = 60;
 		new LwjglApplication(new ZetaSymbol(), config);
 	}
 }

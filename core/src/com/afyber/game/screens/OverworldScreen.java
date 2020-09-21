@@ -32,9 +32,7 @@ public class OverworldScreen extends MyScreenAdapter {
 
         game.batch.begin();
 
-        // TODO
         world.render(game.batch);
-        game.font.draw(game.batch, "test", 50f, 100f);
 
         game.batch.end();
 
@@ -42,6 +40,6 @@ public class OverworldScreen extends MyScreenAdapter {
     }
 
     public void update(float delta) {
-
+        world.update(delta);
     }
 }

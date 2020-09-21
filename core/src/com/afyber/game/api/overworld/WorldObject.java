@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class WorldObject {
-    public int[] worldPos;
+    public float[] worldPos;
 
     public TextureRegion sprite;
 
     public WorldObject(int x, int y) {
-        worldPos = new int[2];
+        worldPos = new float[2];
         worldPos[0] = x;
         worldPos[1] = y;
     }

@@ -29,6 +29,28 @@ public class Overworld {
                 tile.render(batch, 0, 0);
             }
         }
+        for (Collision collision:
+             collisions) {
+            if (collision != null) {
+                collision.render(batch, 0, 0);
+            }
+        }
         player.render(batch, 0, 0);
+    }
+
+    public void update(float delta) {
+        player.update(delta, this);
+    }
+
+    public boolean collidedWithWorld(int x, int y, int width, int height) {
+        for (Collision collision:
+             collisions) {
+            if (collision != null) {
+                if (collision.isColliding(x, y, width, height)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
