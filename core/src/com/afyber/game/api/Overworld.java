@@ -5,7 +5,6 @@ import com.afyber.game.api.overworld.Player;
 import com.afyber.game.api.overworld.Tile;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-// TODO
 public class Overworld {
     public Tile[] tiles;
     public Collision[] collisions;

@@ -13,5 +13,5 @@ public enum TileDirection {
     SW_INNER,
     NE_INNER,
     NW_INNER,
-    FLOOR,
+    EMPTY,
 }

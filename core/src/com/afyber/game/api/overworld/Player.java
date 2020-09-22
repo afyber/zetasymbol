@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Player extends WorldObject {
-    Direction facing;
+    public Direction facing;
     boolean walking;
 
     Texture me;

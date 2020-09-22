@@ -25,7 +25,8 @@ public class OverworldScreen extends MyScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        // there's no need for a one-color floor tile if the clear color is the same color as the tile :)
+        Gdx.gl.glClearColor(0.031f, 0.102f, 0.047f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         updateScreen();

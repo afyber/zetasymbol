@@ -1,6 +1,5 @@
 package com.afyber.game.api.overworld;
 
-import com.afyber.game.api.Direction;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -73,7 +72,7 @@ public class TileTextureRegions {
                 return tiles[11];
             case NW_INNER:
                 return tiles[12];
-            case FLOOR:
+            case EMPTY:
                 return tiles[4];
         }
         // because I loooooove nullpointerexceptions...
