@@ -20,7 +20,8 @@ public class Player extends WorldObject {
     // second list
     // 0: standing still
     // 1: walk frame 1
-    // 2: walk frame 2
+    // 2: standing still again
+    // 3: walk frame 2
     TextureRegion[][] sprites;
 
     public Player(int x, int y) {
@@ -32,7 +33,7 @@ public class Player extends WorldObject {
     }
 
     private void initializeSprites() {
-        sprites = new TextureRegion[4][3];
+        sprites = new TextureRegion[4][4];
         for (int i = 0; i < sprites.length; i++) {
             for (int c = 0; c < sprites[0].length; c++) {
                 sprites[i][c] = new TextureRegion(spriteSheet, 16 * i, 16 * c, 16, 16);
@@ -71,18 +72,29 @@ public class Player extends WorldObject {
             facing = Direction.DOWN;
         }
 
+        // this whole thing is dumb
+        if (ZetaSymbol.input[0] || ZetaSymbol.input[1] || ZetaSymbol.input[2] || ZetaSymbol.input[3]) {
+            isWalkingFrames += 1;
+            if (isWalkingFrames > 59) {
+                isWalkingFrames = 0;
+            }
+        }
+        else {
+            isWalkingFrames = 0;
+        }
+
         switch (facing) {
             case LEFT:
-                sprite = sprites[0][0];
+                sprite = sprites[0][isWalkingFrames / 15];
                 break;
             case RIGHT:
-                sprite = sprites[1][0];
+                sprite = sprites[1][isWalkingFrames / 15];
                 break;
             case UP:
-                sprite = sprites[2][0];
+                sprite = sprites[2][isWalkingFrames / 15];
                 break;
             case DOWN:
-                sprite = sprites[3][0];
+                sprite = sprites[3][isWalkingFrames / 15];
                 break;
         }
     }
