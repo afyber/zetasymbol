@@ -27,7 +27,7 @@ public class TileTextureRegions {
     public static void loadAreaTiles(int areaID) {
         switch (areaID) {
             case 0:
-                tileSet = new Texture("castle tileset.png");
+                tileSet = new Texture("tilesets/castle.png");
                 break;
         }
         tiles = new TextureRegion[13];
