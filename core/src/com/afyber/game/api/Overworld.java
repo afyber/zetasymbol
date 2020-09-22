@@ -41,7 +41,7 @@ public class Overworld {
         player.update(delta, this);
     }
 
-    public boolean collidedWithWorld(int x, int y, int width, int height) {
+    public boolean collidedWithWorld(float x, float y, float width, float height) {
         for (Collision collision:
              collisions) {
             if (collision != null) {
