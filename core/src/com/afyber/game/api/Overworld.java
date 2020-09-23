@@ -77,6 +77,8 @@ public class Overworld {
             if (object != null) {
                 // I hate myself for this, like, does this even work?
                 // surprisingly it does, but I'm very unhappy with it
+                // basically it checks if the object extends Collision
+                // then if it does casts it to collision *throws up* to use the isColliding function
                 if (Collision.class.isAssignableFrom(object.getClass())) {
                     if (((Collision) object).isColliding(x, y, width, height)) {
                         return true;

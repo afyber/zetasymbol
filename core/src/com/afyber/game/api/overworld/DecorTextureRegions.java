@@ -9,6 +9,7 @@ public class DecorTextureRegions {
     private DecorTextureRegions() {}
 
     public static void loadAreaDecor(int areaID) {
+        // not every decorset has the same layout, so nothing is defined by default
         switch (areaID) {
             case 0:
                 Overworld.decorSet = new Texture("tilesets/castle decor.png");

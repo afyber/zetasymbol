@@ -31,6 +31,7 @@ public class TileTextureRegions {
                 Overworld.tileSet = new Texture("tilesets/castle.png");
                 break;
         }
+        // every tileset has the same layout
         tiles = new TextureRegion[13];
         tiles[0] = new TextureRegion(Overworld.tileSet, 0, 0, 16, 16);
         tiles[1] = new TextureRegion(Overworld.tileSet, 16, 0, 16, 16);

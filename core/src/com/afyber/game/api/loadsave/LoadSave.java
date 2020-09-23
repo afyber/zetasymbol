@@ -8,6 +8,7 @@ import com.badlogic.gdx.files.FileHandle;
 
 // I'm honestly disgusted by some of the stuff I've had to do here
 // like I swear there's a less bloaty way to do some of this
+// The Format for levels will be described in docs/LEVELS.txt
 public class LoadSave {
 
     private LoadSave() {
