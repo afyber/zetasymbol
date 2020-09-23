@@ -1,7 +1,7 @@
 package com.afyber.game.screens;
 
 import com.afyber.game.ZetaSymbol;
-import com.afyber.game.api.LoadSave;
+import com.afyber.game.api.loadsave.LoadSave;
 import com.afyber.game.api.MyScreenAdapter;
 import com.afyber.game.api.Overworld;
 import com.badlogic.gdx.Gdx;
@@ -11,14 +11,17 @@ public class OverworldScreen extends MyScreenAdapter {
 
     Overworld world;
 
+    int currentLevelID;
+
     public OverworldScreen(ZetaSymbol game) {
         this(game, 0);
     }
     public OverworldScreen(ZetaSymbol game, int levelID) {
         super(game);
 
+        currentLevelID = levelID;
         world = new Overworld();
-        LoadSave.load(world, levelID, 0);
+        LoadSave.load(world, currentLevelID, 0);
 
         setupScreen();
     }
@@ -37,10 +40,16 @@ public class OverworldScreen extends MyScreenAdapter {
 
         game.batch.end();
 
-        update(delta);
+        update();
     }
 
-    public void update(float delta) {
-        world.update(delta);
+    public void update() {
+        world.update();
+        if (world.levelTransitionDirection != 0) {
+            currentLevelID += world.levelTransitionDirection;
+            world.levelTransitionDirection = 0;
+            world = new Overworld();
+            LoadSave.load(world, currentLevelID, 0);
+        }
     }
 }

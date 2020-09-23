@@ -1,4 +1,4 @@
-package com.afyber.game.api;
+package com.afyber.game.api.loadsave;
 
 public enum LoadingState {
     TILES,

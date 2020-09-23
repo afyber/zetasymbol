@@ -42,7 +42,7 @@ public class Player extends WorldObject {
         sprite = sprites[0][0];
     }
 
-    public void update(float delta, Overworld world) {
+    public void update(Overworld world) {
         if (ZetaSymbol.input[0]) {
             worldPos[0] -= 0.5;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 16, 16)) {
@@ -96,6 +96,11 @@ public class Player extends WorldObject {
             case DOWN:
                 sprite = sprites[3][isWalkingFrames / 15];
                 break;
+        }
+
+        int result = world.collidedWithLevelTransition(worldPos[0], worldPos[1], 16, 16);
+        if (result != 0) {
+            world.levelTransitionDirection = result;
         }
     }
 }

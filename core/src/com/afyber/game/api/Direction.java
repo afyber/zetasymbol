@@ -4,5 +4,18 @@ public enum Direction {
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN;
+
+    public static Direction stringToEnum(String string) {
+        switch (string) {
+            case "LEFT":
+                return Direction.LEFT;
+            case "RIGHT":
+                return Direction.RIGHT;
+            case "UP":
+                return Direction.UP;
+            default:
+                return Direction.DOWN;
+        }
+    }
 }

@@ -39,3 +39,5 @@ collisions
 148,12,12,120
 player
 100,100,DOWN
+objects
+LEVEL_TRANSITION,0,-16,160,8,1
