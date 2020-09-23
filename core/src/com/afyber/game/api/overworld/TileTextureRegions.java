@@ -1,6 +1,7 @@
 package com.afyber.game.api.overworld;
 
 import com.afyber.game.api.Overworld;
+import com.afyber.game.api.loadsave.LoadSave;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -26,11 +27,8 @@ public class TileTextureRegions {
     private static TextureRegion[] tiles;
 
     public static void loadAreaTiles(int areaID) {
-        switch (areaID) {
-            case 0:
-                Overworld.tileSet = new Texture("tilesets/castle.png");
-                break;
-        }
+        Overworld.tileSet = new Texture("tilesets/" + LoadSave.areaIDToString(areaID) +".png");
+
         // every tileset has the same layout
         tiles = new TextureRegion[13];
         tiles[0] = new TextureRegion(Overworld.tileSet, 0, 0, 16, 16);

@@ -8,7 +8,7 @@ import com.badlogic.gdx.files.FileHandle;
 
 // I'm honestly disgusted by some of the stuff I've had to do here
 // like I swear there's a less bloaty way to do some of this
-// The Format for levels will be described in docs/LEVELS.txt
+// The format for levels will be described in docs/LEVELS.txt
 public class LoadSave {
 
     private LoadSave() {
@@ -19,7 +19,7 @@ public class LoadSave {
         TileTextureRegions.loadAreaTiles(areaID);
         DecorTextureRegions.loadAreaDecor(areaID);
 
-        FileHandle file = Gdx.files.internal("areas/castle/" + levelID + ".txt");
+        FileHandle file = Gdx.files.internal("areas/" + areaIDToString(areaID) + "/" + levelID + ".txt");
         String[] fileContents = file.readString().split("\n");
 
         LoadingState state = LoadingState.TILES;
@@ -90,5 +90,21 @@ public class LoadSave {
 
     public static void save(Overworld world) {
 
+    }
+
+    public static String areaIDToString(int areaID) {
+        switch (areaID) {
+            case 0:
+                return "castle";
+            case 1:
+                return "forest";
+            case 2:
+                return "field";
+            case 3:
+                return "knowhere";
+            case 4:
+                return "town";
+        }
+        return null;
     }
 }
