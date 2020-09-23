@@ -1,11 +1,12 @@
 package com.afyber.game.api.overworld;
 
+import com.afyber.game.api.Overworld;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class TileTextureRegions {
 
-    private static Texture tileSet;
+    private TileTextureRegions() {}
 
     // the tile order is left to right, top to bottom (in the image file)
     // the direction is the direction towards where the player can walk (the north wall stops you from moving down)
@@ -27,23 +28,23 @@ public class TileTextureRegions {
     public static void loadAreaTiles(int areaID) {
         switch (areaID) {
             case 0:
-                tileSet = new Texture("tilesets/castle.png");
+                Overworld.tileSet = new Texture("tilesets/castle.png");
                 break;
         }
         tiles = new TextureRegion[13];
-        tiles[0] = new TextureRegion(tileSet, 0, 0, 16, 16);
-        tiles[1] = new TextureRegion(tileSet, 16, 0, 16, 16);
-        tiles[2] = new TextureRegion(tileSet, 32, 0, 16, 16);
-        tiles[3] = new TextureRegion(tileSet, 0, 16, 16, 16);
-        tiles[4] = new TextureRegion(tileSet, 16, 16, 16, 16);
-        tiles[5] = new TextureRegion(tileSet, 32, 16, 16, 16);
-        tiles[6] = new TextureRegion(tileSet, 0, 32, 16, 16);
-        tiles[7] = new TextureRegion(tileSet, 16, 32, 16, 16);
-        tiles[8] = new TextureRegion(tileSet, 32, 32, 16, 16);
-        tiles[9] = new TextureRegion(tileSet, 0, 48, 16, 16);
-        tiles[10] = new TextureRegion(tileSet, 16, 48, 16, 16);
-        tiles[11] = new TextureRegion(tileSet, 0, 64, 16, 16);
-        tiles[12] = new TextureRegion(tileSet, 16, 64, 16, 16);
+        tiles[0] = new TextureRegion(Overworld.tileSet, 0, 0, 16, 16);
+        tiles[1] = new TextureRegion(Overworld.tileSet, 16, 0, 16, 16);
+        tiles[2] = new TextureRegion(Overworld.tileSet, 32, 0, 16, 16);
+        tiles[3] = new TextureRegion(Overworld.tileSet, 0, 16, 16, 16);
+        tiles[4] = new TextureRegion(Overworld.tileSet, 16, 16, 16, 16);
+        tiles[5] = new TextureRegion(Overworld.tileSet, 32, 16, 16, 16);
+        tiles[6] = new TextureRegion(Overworld.tileSet, 0, 32, 16, 16);
+        tiles[7] = new TextureRegion(Overworld.tileSet, 16, 32, 16, 16);
+        tiles[8] = new TextureRegion(Overworld.tileSet, 32, 32, 16, 16);
+        tiles[9] = new TextureRegion(Overworld.tileSet, 0, 48, 16, 16);
+        tiles[10] = new TextureRegion(Overworld.tileSet, 16, 48, 16, 16);
+        tiles[11] = new TextureRegion(Overworld.tileSet, 0, 64, 16, 16);
+        tiles[12] = new TextureRegion(Overworld.tileSet, 16, 64, 16, 16);
     }
 
     public static TextureRegion getRegionForDirection(TileDirection direction) {
@@ -78,9 +79,5 @@ public class TileTextureRegions {
         // because I loooooove nullpointerexceptions...
         // that was a joke
         return null;
-    }
-
-    public void dispose() {
-        tileSet.dispose();
     }
 }

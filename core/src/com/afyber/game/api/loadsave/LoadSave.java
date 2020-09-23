@@ -2,7 +2,6 @@ package com.afyber.game.api.loadsave;
 
 import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
-import com.afyber.game.api.loadsave.LoadingState;
 import com.afyber.game.api.overworld.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -11,9 +10,13 @@ import com.badlogic.gdx.files.FileHandle;
 // like I swear there's a less bloaty way to do some of this
 public class LoadSave {
 
+    private LoadSave() {
+    }
+
     // welcome to the land of split() and parseInt()
     public static void load(Overworld world, int levelID, int areaID) {
         TileTextureRegions.loadAreaTiles(areaID);
+        DecorTextureRegions.loadAreaDecor(areaID);
 
         FileHandle file = Gdx.files.internal("areas/castle/" + levelID + ".txt");
         String[] fileContents = file.readString().split("\n");
@@ -39,12 +42,7 @@ public class LoadSave {
                 continue;
             }
 
-            String[] args = line.split(",");
-
-            // probably absolute terribleness
-            for (int i = 0; i < args.length; i++) {
-                args[i] = args[i].replace("\r", "");
-            }
+            String[] args = line.replace("\r", "").split(",");
 
             if (state == LoadingState.TILES) {
                 TileDirection direction = TileDirection.stringToEnum(args[2]);
@@ -75,6 +73,13 @@ public class LoadSave {
                     for (int i = 0; i < 100; i++) {
                         if (world.transitions[i] == null) {
                             world.transitions[i] = new LevelTransition(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+                        }
+                    }
+                }
+                else if (objectType == WorldObjectType.DECOR_OBJECT) {
+                    for (int i = 0; i < 1000; i++) {
+                        if (world.worldObjects[i] == null) {
+                            world.worldObjects[i] = new DecorObject(Integer.parseInt(args[1]), Integer.parseInt(args[2]), DecorTextureRegions.createRegion(Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), Integer.parseInt(args[6])), Boolean.parseBoolean(args[7]));
                         }
                     }
                 }

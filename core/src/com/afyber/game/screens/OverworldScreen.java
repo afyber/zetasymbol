@@ -52,4 +52,10 @@ public class OverworldScreen extends MyScreenAdapter {
             LoadSave.load(world, currentLevelID, 0);
         }
     }
+
+    @Override
+    public void dispose() {
+        world.dispose();
+        super.dispose();
+    }
 }
