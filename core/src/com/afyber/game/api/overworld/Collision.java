@@ -20,8 +20,8 @@ public class Collision extends WorldObject {
 
     public boolean isColliding(float x, float y, float width, float height) {
         // well at least it's consistent now
-        if (worldPos[0] + collisionDimensions[0] >= x && x + width >= worldPos[0]) {
-            if (worldPos[1] + collisionDimensions[1] >= y && y + height >= worldPos[1]) {
+        if (worldPos[0] + collisionDimensions[0] > x && x + width > worldPos[0]) {
+            if (worldPos[1] + collisionDimensions[1] > y && y + height > worldPos[1]) {
                 return true;
             }
         }

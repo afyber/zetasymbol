@@ -19,11 +19,7 @@ public class DecorObject extends Collision {
 
     public boolean isColliding(float x, float y, float width, float height) {
         if (collidable) {
-            if (worldPos[0] + sprite.getRegionWidth() >= x && x + width >= worldPos[0]) {
-                if (worldPos[1] + sprite.getRegionHeight() >= y && y + height >= worldPos[1]) {
-                    return true;
-                }
-            }
+            super.isColliding(x, y, width, height);
         }
         return false;
     }
