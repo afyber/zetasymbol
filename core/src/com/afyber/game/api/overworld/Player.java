@@ -36,7 +36,7 @@ public class Player extends WorldObject {
         sprites = new TextureRegion[4][4];
         for (int i = 0; i < sprites.length; i++) {
             for (int c = 0; c < sprites[0].length; c++) {
-                sprites[i][c] = new TextureRegion(spriteSheet, 16 * i, 16 * c, 16, 16);
+                sprites[i][c] = new TextureRegion(spriteSheet, 10 * i, 11 * c, 10, 11);
             }
         }
         sprite = sprites[0][0];
@@ -45,28 +45,28 @@ public class Player extends WorldObject {
     public void update(Overworld world) {
         if (ZetaSymbol.input[0]) {
             worldPos[0] -= 0.5;
-            if (world.collidedWithWorld(worldPos[0], worldPos[1], 16, 16)) {
+            if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[0] += 0.5;
             }
             facing = Direction.LEFT;
         }
         if (ZetaSymbol.input[1]) {
             worldPos[0] += 0.5;
-            if (world.collidedWithWorld(worldPos[0], worldPos[1], 16, 16)) {
+            if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[0] -= 0.5;
             }
             facing = Direction.RIGHT;
         }
         if (ZetaSymbol.input[2]) {
             worldPos[1] += 0.5;
-            if (world.collidedWithWorld(worldPos[0], worldPos[1], 16, 16)) {
+            if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[1] -= 0.5;
             }
             facing = Direction.UP;
         }
         if (ZetaSymbol.input[3]) {
             worldPos[1] -= 0.5;
-            if (world.collidedWithWorld(worldPos[0], worldPos[1], 16, 16)) {
+            if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[1] += 0.5;
             }
             facing = Direction.DOWN;
@@ -98,7 +98,7 @@ public class Player extends WorldObject {
                 break;
         }
 
-        int result = world.collidedWithLevelTransition(worldPos[0], worldPos[1], 16, 16);
+        int result = world.collidedWithLevelTransition(worldPos[0], worldPos[1], 10, 11);
         if (result != 0) {
             world.levelTransitionDirection = result;
         }

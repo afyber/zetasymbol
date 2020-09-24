@@ -43,7 +43,8 @@ public class LoadSave {
                 continue;
             }
 
-            String[] args = line.replace("\r", "").split(",");
+            // just get rid of whitespace
+            String[] args = line.replaceAll("[ \r]", "").split(",");
 
             if (state == LoadingState.TILES) {
                 TileDirection direction = TileDirection.stringToEnum(args[2]);
