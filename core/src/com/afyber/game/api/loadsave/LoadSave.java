@@ -3,6 +3,7 @@ package com.afyber.game.api.loadsave;
 import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
 import com.afyber.game.api.overworld.*;
+import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
@@ -84,6 +85,29 @@ public class LoadSave {
                             world.worldObjects[i] = new DecorObject(Integer.parseInt(args[1]), Integer.parseInt(args[2]), DecorTextureRegions.createRegion(Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), Integer.parseInt(args[6])), Boolean.parseBoolean(args[7]));
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public static void loadMusic(BattleScreen current, int musicID, int areaID) {
+        current.music = Gdx.audio.newMusic(Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".wav"));
+        FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".txt");
+        String[] textData = data.readString().split("\n");
+        for (String line:
+                textData) {
+            if (!line.startsWith("|")) {
+                String[] args = line.replaceAll("[ \r]", "").split(",");
+                current.beatsPerSec = Integer.parseInt(args[0]);
+                current.secsPerBeat = 60f / current.beatsPerSec;
+                current.timeSigTop = Integer.parseInt(args[1]);
+                current.usesEighths = Boolean.getBoolean(args[2]);
+                current.noteData = new int[100][current.timeSigTop];
+            }
+            else {
+                String[] args = line.replace("|", "").split(" ");
+                for (int i = 0; i < current.timeSigTop; i++) {
+                    current.noteData[0][i] = Integer.parseInt(args[i]);
                 }
             }
         }
