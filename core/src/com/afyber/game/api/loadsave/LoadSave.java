@@ -102,7 +102,12 @@ public class LoadSave {
                 current.secsPerBeat = 60f / current.beatsPerSec;
                 current.timeSigTop = Integer.parseInt(args[1]);
                 current.usesEighths = Boolean.getBoolean(args[2]);
-                current.noteData = new int[100][current.timeSigTop];
+                if (current.usesEighths) {
+                    current.noteData = new int[100][current.timeSigTop * 2];
+                }
+                else {
+                    current.noteData = new int[100][current.timeSigTop];
+                }
             }
             else {
                 String[] args = line.replace("|", "").split(" ");
@@ -129,7 +134,8 @@ public class LoadSave {
                 return "knowhere";
             case 4:
                 return "town";
+            default:
+                return null;
         }
-        return null;
     }
 }
