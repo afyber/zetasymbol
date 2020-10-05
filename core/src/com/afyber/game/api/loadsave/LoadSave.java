@@ -102,17 +102,36 @@ public class LoadSave {
                 current.secsPerBeat = 60f / current.beatsPerSec;
                 current.timeSigTop = Integer.parseInt(args[1]);
                 current.usesEighths = Boolean.getBoolean(args[2]);
-                if (current.usesEighths) {
-                    current.noteData = new int[100][current.timeSigTop * 2];
-                }
-                else {
-                    current.noteData = new int[100][current.timeSigTop];
-                }
+                current.noteData = new int[100][];
             }
             else {
                 String[] args = line.replace("|", "").split(" ");
-                for (int i = 0; i < current.timeSigTop; i++) {
-                    current.noteData[0][i] = Integer.parseInt(args[i]);
+                for (int i = 0; i < current.noteData.length; i++) {
+                    if (current.noteData[i] == null) {
+                        if (current.usesEighths) {
+                            current.noteData[i] = new int[current.timeSigTop * 2];
+                            for (int c = 0; c < current.timeSigTop * 2; c++) {
+                                current.noteData[i][c] = Integer.parseInt(args[i]);
+                            }
+                        }
+                        else {
+                            current.noteData[i] = new int[current.timeSigTop];
+                            for (int c = 0; c < current.timeSigTop; c++) {
+                                current.noteData[i][c] = Integer.parseInt(args[c]);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < current.noteData.length; i++) {
+            if (current.noteData[i] == null) {
+                if (current.usesEighths) {
+                    current.noteData[i] = new int[current.timeSigTop * 2];
+                }
+                else {
+                    current.noteData[i] = new int[current.timeSigTop];
                 }
             }
         }
