@@ -66,25 +66,27 @@ public class BattleScreen extends MyScreenAdapter {
             currentBeatNum = (int)Math.floor(posInSong / secsPerBeat) % timeSigTop;
             currentMeasureNum = (int)Math.floor(posInSong / (secsPerBeat * timeSigTop));
             // the closer to 0 this is the closer to on-beat you are
-            deltaFromBeat = (posInSong + 0.5f) % secsPerBeat - 0.5f;
+            deltaFromBeat = (posInSong + 0.5f + game.calibration) % secsPerBeat - 0.5f;
 
             if (currentBeat != currentBeatNum) {
                 triedToHit = false;
             }
 
-            if (noteData[currentMeasureNum][currentBeatNum] == 1) {
-                if (ZetaSymbol.input[4]) {
-                    gradeHit();
+            if (!triedToHit) {
+                if (noteData[currentMeasureNum][currentBeatNum] == 1) {
+                    if (ZetaSymbol.input[4]) {
+                        gradeHit();
+                    }
                 }
-            }
-            if (noteData[currentMeasureNum][currentBeatNum] == 2) {
-                if (ZetaSymbol.input[5]) {
-                    gradeHit();
+                if (noteData[currentMeasureNum][currentBeatNum] == 2) {
+                    if (ZetaSymbol.input[5]) {
+                        gradeHit();
+                    }
                 }
-            }
-            if (noteData[currentMeasureNum][currentBeatNum] == 3) {
-                if (ZetaSymbol.input[4] && ZetaSymbol.input[5]) {
-                    gradeHit();
+                if (noteData[currentMeasureNum][currentBeatNum] == 3) {
+                    if (ZetaSymbol.input[4] && ZetaSymbol.input[5]) {
+                        gradeHit();
+                    }
                 }
             }
         }
@@ -93,21 +95,22 @@ public class BattleScreen extends MyScreenAdapter {
     private void gradeHit() {
         float gradeAbs = Math.abs(deltaFromBeat);
 
-        if (gradeAbs < 0.025f) {
+        if (gradeAbs < 0.02f) {
             System.out.println("Absolutely Perfect!");
         }
         else if (gradeAbs < 0.05f) {
             System.out.println("Perfect!");
         }
-        else if (gradeAbs < 0.15f) {
+        else if (gradeAbs < 0.125f) {
             System.out.println("Good!");
         }
-        else if (gradeAbs < 0.33f) {
+        else if (gradeAbs < 0.2f) {
             System.out.println("Alright.");
         }
         else {
             System.out.println("Miss.");
         }
+        System.out.println(deltaFromBeat * secsPerBeat);
 
         triedToHit = true;
     }
