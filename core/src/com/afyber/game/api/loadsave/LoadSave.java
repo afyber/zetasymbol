@@ -2,6 +2,7 @@ package com.afyber.game.api.loadsave;
 
 import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
+import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.overworld.*;
 import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
@@ -90,8 +91,7 @@ public class LoadSave {
         }
     }
 
-    public static void loadMusic(BattleScreen current, int musicID, int areaID) {
-        current.music = Gdx.audio.newMusic(Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".wav"));
+    public static void loadMusic(Rythm current, int musicID, int areaID) {
         FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".txt");
         String[] textData = data.readString().split("\n");
         for (String line:

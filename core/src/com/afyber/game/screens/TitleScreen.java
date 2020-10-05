@@ -26,7 +26,7 @@ public class TitleScreen extends MyScreenAdapter {
 
         game.font.draw(game.batch, ZetaSymbol.WINDOW_TITLE, 50f, 100f);
 
-        game.font.draw(game.batch, String.format("calibration: %.03fms", game.calibration), 16, 32);
+        game.font.draw(game.batch, String.format("calibration: %.03fms", ZetaSymbol.calibration), 16, 32);
 
         game.batch.end();
 
@@ -38,10 +38,10 @@ public class TitleScreen extends MyScreenAdapter {
             game.setScreen(new BattleScreen(game, 0, 0));
         }
         if (ZetaSymbol.input[0]) {
-            game.calibration -= 0.001f;
+            ZetaSymbol.calibration -= 0.001f;
         }
         if (ZetaSymbol.input[1]) {
-            game.calibration += 0.001f;
+            ZetaSymbol.calibration += 0.001f;
         }
     }
 }
