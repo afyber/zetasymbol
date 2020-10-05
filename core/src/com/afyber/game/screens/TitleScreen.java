@@ -26,6 +26,8 @@ public class TitleScreen extends MyScreenAdapter {
 
         game.font.draw(game.batch, ZetaSymbol.WINDOW_TITLE, 50f, 100f);
 
+        game.font.draw(game.batch, String.format("calibration: %.03fms", game.calibration), 16, 32);
+
         game.batch.end();
 
         update(delta);
@@ -33,7 +35,13 @@ public class TitleScreen extends MyScreenAdapter {
 
     public void update(float delta) {
         if (ZetaSymbol.input[4]) {
-            game.setScreen(new OverworldScreen(game));
+            game.setScreen(new BattleScreen(game, 0, 0));
+        }
+        if (ZetaSymbol.input[0]) {
+            game.calibration -= 0.001f;
+        }
+        if (ZetaSymbol.input[1]) {
+            game.calibration += 0.001f;
         }
     }
 }
