@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Player extends WorldObject {
     public Direction facing;
-    boolean walking;
-    int isWalkingFrames;
+    public boolean walking;
+    private int isWalkingFrames;
 
     Texture spriteSheet;
     // list of lists, first list
@@ -78,9 +78,11 @@ public class Player extends WorldObject {
             if (isWalkingFrames > 59) {
                 isWalkingFrames = 0;
             }
+            walking = true;
         }
         else {
             isWalkingFrames = 0;
+            walking = false;
         }
 
         switch (facing) {

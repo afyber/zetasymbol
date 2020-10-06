@@ -11,7 +11,7 @@ public class Overworld {
     // generic collision (invisible)
     public Collision[] collisions;
 
-    // tells the game to load a new level
+    // tells the game to load a new level when you collide with them
     public LevelTransition[] transitions;
 
     // general objects, can be collidable or not, this could get very confusing
@@ -19,6 +19,9 @@ public class Overworld {
 
     // TODO: battle system
     public int[] monsterEncounterIDs;
+    public int framesSinceLastEncounter;
+
+    public int currentEncounterID;
 
     public int levelTransitionDirection;
 
@@ -33,6 +36,8 @@ public class Overworld {
         transitions = new LevelTransition[100];
         worldObjects = new WorldObject[1000];
         monsterEncounterIDs = new int[10];
+        framesSinceLastEncounter = 0;
+        currentEncounterID = -1;
 
         player = new Player(0, 0);
     }
@@ -61,6 +66,13 @@ public class Overworld {
 
     public void update() {
         player.update(this);
+        framesSinceLastEncounter += 1;
+        if (player.walking && framesSinceLastEncounter >= 420) {
+            if (Math.random() * 100 > 99.69) {
+                System.out.println("Encounter");
+                currentEncounterID = monsterEncounterIDs[(int)(System.currentTimeMillis() % monsterEncounterIDs.length)];
+            }
+        }
     }
 
     public boolean collidedWithWorld(float x, float y, float width, float height) {
@@ -104,5 +116,12 @@ public class Overworld {
     public void dispose() {
         tileSet.dispose();
         decorSet.dispose();
+    }
+
+    public void setupMonsterIDs(int areaID) {
+        switch (areaID) {
+            case 0:
+                monsterEncounterIDs = new int[]{0};
+        }
     }
 }

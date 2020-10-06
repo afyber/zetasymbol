@@ -4,7 +4,6 @@ import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.overworld.*;
-import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
@@ -20,6 +19,8 @@ public class LoadSave {
     public static void load(Overworld world, int levelID, int areaID) {
         TileTextureRegions.loadAreaTiles(areaID);
         DecorTextureRegions.loadAreaDecor(areaID);
+
+        world.setupMonsterIDs(areaID);
 
         FileHandle file = Gdx.files.internal("areas/" + areaIDToString(areaID) + "/" + levelID + ".txt");
         String[] fileContents = file.readString().split("\n");

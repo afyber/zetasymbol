@@ -64,7 +64,7 @@ public class Rythm {
                 gradeHit();
             }
             else {
-                System.out.println("Miss");
+                System.out.println("Wrong note.");
             }
             triedToHit = true;
         }
