@@ -51,41 +51,44 @@ public class Rythm {
 
     public void attemptHit() {
         if (!triedToHit) {
-            if (ZetaSymbol.input[4] && noteData[currentMeasureNum][currentBeatNum] == 1) {
+            if (ZetaSymbol.input[4] && noteData[currentMeasureNum][currentBeatNum] == 1 &&
+                !ZetaSymbol.input[5] && !ZetaSymbol.input[6]) {
                 gradeHit();
             }
-            else if (ZetaSymbol.input[5] && noteData[currentMeasureNum][currentBeatNum] == 2) {
+            else if (ZetaSymbol.input[5] && noteData[currentMeasureNum][currentBeatNum] == 2 &&
+                    !ZetaSymbol.input[4] && !ZetaSymbol.input[6]) {
                 gradeHit();
             }
-            else if (ZetaSymbol.input[6] && noteData[currentMeasureNum][currentBeatNum] == 3) {
+            else if (ZetaSymbol.input[6] && noteData[currentMeasureNum][currentBeatNum] == 3 &&
+                    !ZetaSymbol.input[4] && !ZetaSymbol.input[5]) {
                 gradeHit();
             }
             else {
+                System.out.println("Miss");
             }
+            triedToHit = true;
         }
     }
 
     private void gradeHit() {
         float gradeAbs = Math.abs(deltaFromBeat);
 
-        if (gradeAbs < 0.02f) {
+        if (gradeAbs < 0.01f) {
             System.out.println("Absolutely Perfect!");
         }
-        else if (gradeAbs < 0.05f) {
+        else if (gradeAbs < 0.04f) {
             System.out.println("Perfect!");
         }
-        else if (gradeAbs < 0.125f) {
+        else if (gradeAbs < 0.1f) {
             System.out.println("Good!");
         }
-        else if (gradeAbs < 0.2f) {
+        else if (gradeAbs < 0.15f) {
             System.out.println("Alright.");
         }
         else {
             System.out.println("Miss.");
         }
         System.out.println(deltaFromBeat * secsPerBeat);
-
-        triedToHit = true;
     }
 
     public void play() {
