@@ -13,11 +13,16 @@ public class BattleScreen extends MyScreenAdapter {
     public Music music;
     private Rythm rythm;
 
+    // monster info
+    public int health;
+    public int def;
+
     public BattleScreen(ZetaSymbol game, int monsterID, int areaID) {
         super(game);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + monsterID + ".wav"));
         rythm = new Rythm();
         LoadSave.loadMusic(rythm, monsterID, areaID);
+        LoadSave.loadMonster(this, monsterID, areaID);
         setupScreen();
     }
 

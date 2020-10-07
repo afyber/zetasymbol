@@ -122,6 +122,7 @@ public class Overworld {
         switch (areaID) {
             case 0:
                 monsterEncounterIDs = new int[]{0};
+                break;
         }
     }
 }

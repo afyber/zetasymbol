@@ -4,6 +4,7 @@ import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.overworld.*;
+import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
@@ -93,7 +94,7 @@ public class LoadSave {
     }
 
     public static void loadMusic(Rythm current, int musicID, int areaID) {
-        FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".txt");
+        FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + musicID + ".mus");
         String[] textData = data.readString().split("\n");
         for (String line:
                 textData) {
@@ -136,6 +137,14 @@ public class LoadSave {
                 }
             }
         }
+    }
+
+    public static void loadMonster(BattleScreen screen, int monsterID, int areaID) {
+        FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + monsterID + ".mon");
+        String[] textData = data.readString().split("\n");
+        String[] args = textData[0].replaceAll("[\r ]", "").split(",");
+        screen.health = Integer.parseInt(args[0]);
+        screen.def = Integer.parseInt(args[1]);
     }
 
     public static void save(Overworld world) {

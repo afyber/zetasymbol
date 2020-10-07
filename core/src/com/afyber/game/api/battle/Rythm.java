@@ -74,10 +74,10 @@ public class Rythm {
         float gradeAbs = Math.abs(deltaFromBeat);
 
         if (gradeAbs < 0.01f) {
-            System.out.println("Absolutely Perfect!");
+            System.out.println("Perfect!");
         }
         else if (gradeAbs < 0.04f) {
-            System.out.println("Perfect!");
+            System.out.println("Excellent!");
         }
         else if (gradeAbs < 0.1f) {
             System.out.println("Good!");

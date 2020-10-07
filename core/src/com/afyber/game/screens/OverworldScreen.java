@@ -53,6 +53,8 @@ public class OverworldScreen extends MyScreenAdapter {
         }
         if (world.currentEncounterID != -1) {
             game.setScreen(new BattleScreen(game, world.currentEncounterID, 0));
+            game.overworldX = world.player.worldPos[0];
+            game.overworldY = world.player.worldPos[1];
             world.currentEncounterID = -1;
             world.framesSinceLastEncounter = 0;
         }

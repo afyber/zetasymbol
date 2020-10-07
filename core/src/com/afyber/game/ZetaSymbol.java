@@ -24,8 +24,8 @@ public class ZetaSymbol extends Game {
 	public static InputHandling handler;
 
 	// just for use globally to store overworld position in-between battles
-	public int overworldX;
-	public int overworldY;
+	public float overworldX;
+	public float overworldY;
 
 	public static final int SCREEN_WIDTH = 160;
 	public static final int SCREEN_HEIGHT = 144;
