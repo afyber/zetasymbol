@@ -2,11 +2,14 @@ package com.afyber.game.api.loadsave;
 
 import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
+import com.afyber.game.api.battle.HitRating;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.overworld.*;
 import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+
+import java.util.ArrayList;
 
 // I'm honestly disgusted by some of the stuff I've had to do here
 // like I swear there's a less bloaty way to do some of this
@@ -137,6 +140,7 @@ public class LoadSave {
                 }
             }
         }
+        current.ratings = new ArrayList<>();
     }
 
     public static void loadMonster(BattleScreen screen, int monsterID, int areaID) {

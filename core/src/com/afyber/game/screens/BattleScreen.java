@@ -2,11 +2,15 @@ package com.afyber.game.screens;
 
 import com.afyber.game.ZetaSymbol;
 import com.afyber.game.api.MyScreenAdapter;
+import com.afyber.game.api.Overworld;
+import com.afyber.game.api.battle.HitRating;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.loadsave.LoadSave;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+
+import java.util.ArrayList;
 
 public class BattleScreen extends MyScreenAdapter {
 
@@ -17,12 +21,32 @@ public class BattleScreen extends MyScreenAdapter {
     public int health;
     public int def;
 
+    // What's happening in the battle
+    // start
+    // 0: The player is in the menu
+    // 1: Preview of the rythm section
+    // 2: The player is doing the rythm section
+    // 3: The monster is taking damage
+    // back to 0 unless the monster is dead
+    public int battleState;
+    // 0: Continue
+    // 1: Item
+    public int menuPos;
+    // 0: Has not played this turn
+    // 1: Is playing
+    // 2: Played for the preview
+    // 3: Finished playing this turn
+    public int musicState;
+
     public BattleScreen(ZetaSymbol game, int monsterID, int areaID) {
         super(game);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + monsterID + ".wav"));
         rythm = new Rythm();
         LoadSave.loadMusic(rythm, monsterID, areaID);
         LoadSave.loadMonster(this, monsterID, areaID);
+        battleState = 0;
+        menuPos = 0;
+        musicState = 0;
         setupScreen();
     }
 
@@ -40,19 +64,65 @@ public class BattleScreen extends MyScreenAdapter {
         game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
         game.font.draw(game.batch, String.valueOf(rythm.deltaFromBeat), 0, 32);
 
+        game.font.draw(game.batch, "B" + battleState, 112, 16);
+        game.font.draw(game.batch, "M" + musicState, 112, 32);
+
         game.batch.end();
 
         update(delta);
     }
 
     public void update(float delta) {
-        if (!music.isPlaying()) {
-            rythm.posInSong = 0;
-            music.play();
-            rythm.play();
+        switch (battleState) {
+            case 0:
+                if (ZetaSymbol.input[4]) {
+                    battleState = 1;
+                }
+                break;
+            case 1:
+                if (!music.isPlaying()) {
+                    if (musicState == 0) {
+                        music.play();
+                        musicState = 1;
+                    }
+                    else if (musicState == 1) {
+                        musicState = 2;
+                        battleState = 2;
+                    }
+                }
+                break;
+            case 2:
+                if (!music.isPlaying()) {
+                    if (musicState == 2) {
+                        music.play();
+                        rythm.play();
+                        musicState = 1;
+                    }
+                    else if (musicState == 1) {
+                        musicState = 3;
+                        battleState = 3;
+                    }
+                }
+                else {
+                    rythm.update(delta);
+                }
+                break;
+            case 3:
+                ArrayList<HitRating> ratings = rythm.ratings;
+                for (HitRating rating:
+                        ratings) {
+                    health -= rating.damage;
+                }
+                battleState = 0;
+                musicState = 0;
+                if (health <= 0) {
+                    exitBattle();
+                }
+                break;
         }
-        else {
-            rythm.update(delta);
-        }
+    }
+
+    private void exitBattle() {
+        game.setScreen(game.overworld);
     }
 }

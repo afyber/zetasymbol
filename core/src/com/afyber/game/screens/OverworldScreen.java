@@ -12,6 +12,7 @@ public class OverworldScreen extends MyScreenAdapter {
     Overworld world;
 
     int currentLevelID;
+    int currentAreaID;
 
     public OverworldScreen(ZetaSymbol game) {
         this(game, 0);
@@ -20,8 +21,9 @@ public class OverworldScreen extends MyScreenAdapter {
         super(game);
 
         currentLevelID = levelID;
+        currentAreaID = 0;
         world = new Overworld();
-        LoadSave.load(world, currentLevelID, 0);
+        LoadSave.load(world, currentLevelID, currentAreaID);
 
         setupScreen();
     }
@@ -53,8 +55,7 @@ public class OverworldScreen extends MyScreenAdapter {
         }
         if (world.currentEncounterID != -1) {
             game.setScreen(new BattleScreen(game, world.currentEncounterID, 0));
-            game.overworldX = world.player.worldPos[0];
-            game.overworldY = world.player.worldPos[1];
+            game.overworld = this;
             world.currentEncounterID = -1;
             world.framesSinceLastEncounter = 0;
         }

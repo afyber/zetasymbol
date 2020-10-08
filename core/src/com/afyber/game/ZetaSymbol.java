@@ -23,9 +23,8 @@ public class ZetaSymbol extends Game {
 	// and yes I do realise there's a lot of static variables ok
 	public static InputHandling handler;
 
-	// just for use globally to store overworld position in-between battles
-	public float overworldX;
-	public float overworldY;
+	// just for use globally to store the overworld in-between battles
+	public OverworldScreen overworld;
 
 	public static final int SCREEN_WIDTH = 160;
 	public static final int SCREEN_HEIGHT = 144;

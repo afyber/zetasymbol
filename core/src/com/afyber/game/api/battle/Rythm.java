@@ -2,6 +2,8 @@ package com.afyber.game.api.battle;
 
 import com.afyber.game.ZetaSymbol;
 
+import java.util.ArrayList;
+
 public class Rythm {
 
     public boolean playing;
@@ -26,8 +28,9 @@ public class Rythm {
     // 3: "C" note?
     public int[][] noteData;
 
-    public Rythm() {
+    public ArrayList<HitRating> ratings;
 
+    public Rythm() {
     }
 
     public void update(float delta) {
@@ -75,23 +78,30 @@ public class Rythm {
 
         if (gradeAbs < 0.01f) {
             System.out.println("Perfect!");
+            ratings.add(HitRating.PERFECT);
         }
         else if (gradeAbs < 0.04f) {
             System.out.println("Excellent!");
+            ratings.add(HitRating.EXCELLENT);
         }
         else if (gradeAbs < 0.1f) {
             System.out.println("Good!");
+            ratings.add(HitRating.GOOD);
         }
         else if (gradeAbs < 0.15f) {
             System.out.println("Alright.");
+            ratings.add(HitRating.ALRIGHT);
         }
         else {
             System.out.println("Miss.");
+            ratings.add(HitRating.MISS);
         }
         System.out.println(deltaFromBeat * secsPerBeat);
     }
 
     public void play() {
+        posInSong = 0;
+        ratings.clear();
         playing = true;
     }
 
