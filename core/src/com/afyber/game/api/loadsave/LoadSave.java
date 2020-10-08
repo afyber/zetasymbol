@@ -2,7 +2,6 @@ package com.afyber.game.api.loadsave;
 
 import com.afyber.game.api.Direction;
 import com.afyber.game.api.Overworld;
-import com.afyber.game.api.battle.HitRating;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.overworld.*;
 import com.afyber.game.screens.BattleScreen;
@@ -147,8 +146,9 @@ public class LoadSave {
         FileHandle data = Gdx.files.internal("music/" + LoadSave.areaIDToString(areaID) + "/" + monsterID + ".mon");
         String[] textData = data.readString().split("\n");
         String[] args = textData[0].replaceAll("[\r ]", "").split(",");
-        screen.health = Integer.parseInt(args[0]);
-        screen.def = Integer.parseInt(args[1]);
+        screen.monsterHealth = Integer.parseInt(args[0]);
+        screen.monsterDef = Integer.parseInt(args[1]);
+        screen.monsterMaxHealth = Integer.parseInt(args[2]);
     }
 
     public static void save(Overworld world) {

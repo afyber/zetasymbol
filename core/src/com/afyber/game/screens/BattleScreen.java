@@ -2,7 +2,7 @@ package com.afyber.game.screens;
 
 import com.afyber.game.ZetaSymbol;
 import com.afyber.game.api.MyScreenAdapter;
-import com.afyber.game.api.Overworld;
+import com.afyber.game.api.battle.GUI;
 import com.afyber.game.api.battle.HitRating;
 import com.afyber.game.api.battle.Rythm;
 import com.afyber.game.api.loadsave.LoadSave;
@@ -16,10 +16,12 @@ public class BattleScreen extends MyScreenAdapter {
 
     public Music music;
     private Rythm rythm;
+    private GUI gui;
 
     // monster info
-    public int health;
-    public int def;
+    public int monsterHealth;
+    public int monsterMaxHealth;
+    public int monsterDef;
 
     // What's happening in the battle
     // start
@@ -44,6 +46,7 @@ public class BattleScreen extends MyScreenAdapter {
         rythm = new Rythm();
         LoadSave.loadMusic(rythm, monsterID, areaID);
         LoadSave.loadMonster(this, monsterID, areaID);
+        gui = new GUI();
         battleState = 0;
         menuPos = 0;
         musicState = 0;
@@ -59,6 +62,8 @@ public class BattleScreen extends MyScreenAdapter {
 
         game.batch.begin();
 
+        gui.drawRect(64, 156, 32, 2, game.batch);
+
         game.font.draw(game.batch, String.valueOf(rythm.noteData[rythm.currentMeasureNum][rythm.currentBeatNum]), 50, 50);
 
         game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
@@ -66,6 +71,7 @@ public class BattleScreen extends MyScreenAdapter {
 
         game.font.draw(game.batch, "B" + battleState, 112, 16);
         game.font.draw(game.batch, "M" + musicState, 112, 32);
+        game.font.draw(game.batch, "MH" + monsterHealth, 0, 96);
 
         game.batch.end();
 
@@ -111,11 +117,14 @@ public class BattleScreen extends MyScreenAdapter {
                 ArrayList<HitRating> ratings = rythm.ratings;
                 for (HitRating rating:
                         ratings) {
-                    health -= rating.damage;
+                    monsterHealth -= rating.getDamage();
                 }
                 battleState = 0;
                 musicState = 0;
-                if (health <= 0) {
+                if (monsterHealth >= monsterMaxHealth) {
+                    monsterHealth = monsterMaxHealth;
+                }
+                if (monsterHealth <= 0) {
                     exitBattle();
                 }
                 break;
