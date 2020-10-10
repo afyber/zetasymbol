@@ -36,7 +36,7 @@ public class BattleScreen extends MyScreenAdapter {
     public int menuPos;
     // 0: Has not played this turn
     // 1: Is playing
-    // 2: Played for the preview
+    // 2: Has played for the preview
     // 3: Finished playing this turn
     public int musicState;
 
@@ -89,6 +89,8 @@ public class BattleScreen extends MyScreenAdapter {
                 if (!music.isPlaying()) {
                     if (musicState == 0) {
                         music.play();
+                        rythm.play();
+                        rythm.previewing = true;
                         musicState = 1;
                     }
                     else if (musicState == 1) {
@@ -96,12 +98,16 @@ public class BattleScreen extends MyScreenAdapter {
                         battleState = 2;
                     }
                 }
+                else {
+                    rythm.update(delta);
+                }
                 break;
             case 2:
                 if (!music.isPlaying()) {
                     if (musicState == 2) {
                         music.play();
                         rythm.play();
+                        rythm.previewing = false;
                         musicState = 1;
                     }
                     else if (musicState == 1) {

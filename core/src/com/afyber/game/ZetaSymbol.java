@@ -33,6 +33,7 @@ public class ZetaSymbol extends Game {
 
 	public static final String WINDOW_TITLE = "zetasymbol";
 
+	// you are now in static variable land
 	public static float calibration = -0.1f;
 	
 	@Override

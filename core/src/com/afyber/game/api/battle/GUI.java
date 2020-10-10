@@ -13,7 +13,7 @@ public class GUI {
     }
 
     /**
-     * draws a rectangle border
+     * draws a rectangle's border
      * @param x1 the upper left corner's x coordinate
      * @param x2 the lower right corner's x coordinate
      * @param y1 the upper left corner's y coordinate

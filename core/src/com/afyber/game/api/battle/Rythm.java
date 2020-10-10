@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Rythm {
 
     public boolean playing;
+    public boolean previewing;
 
     public float beatsPerSec;
     public float secsPerBeat;
@@ -28,6 +29,8 @@ public class Rythm {
     // 3: "C" note?
     public int[][] noteData;
 
+    // this is the only use of a list in the entire project and it's just because I want to be able to use add()
+    // and I might even remove it for consistency
     public ArrayList<HitRating> ratings;
 
     public Rythm() {
@@ -46,7 +49,7 @@ public class Rythm {
                 triedToHit = false;
             }
 
-            if (ZetaSymbol.input[4] || ZetaSymbol.input[5] || ZetaSymbol.input[6]) {
+            if ((ZetaSymbol.input[4] || ZetaSymbol.input[5] || ZetaSymbol.input[6]) && !previewing) {
                 attemptHit();
             }
         }
