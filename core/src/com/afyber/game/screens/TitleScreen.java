@@ -36,7 +36,6 @@ public class TitleScreen extends MyScreenAdapter {
     public void update(float delta) {
         if (ZetaSymbol.input[4]) {
             game.setScreen(new OverworldScreen(game));
-            //game.setScreen(new BattleScreen(game, 0, 0));
         }
         if (ZetaSymbol.input[0]) {
             ZetaSymbol.calibration -= 0.001f;

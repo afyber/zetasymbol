@@ -35,6 +35,7 @@ public class Overworld {
         collisions = new Collision[1000];
         transitions = new LevelTransition[100];
         worldObjects = new WorldObject[1000];
+        levelTransitionDirection = 0;
         monsterEncounterIDs = new int[10];
         framesSinceLastEncounter = 0;
         currentEncounterID = -1;

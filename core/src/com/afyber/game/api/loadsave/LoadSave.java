@@ -71,9 +71,18 @@ public class LoadSave {
                 }
             }
             else if (state == LoadingState.PLAYER) {
-                world.player.worldPos[0] = Integer.parseInt(args[0]);
-                world.player.worldPos[1] = Integer.parseInt(args[1]);
-                world.player.facing = Direction.stringToEnum(args[2]);
+                // coming from a room with a lower ID (> 0) or the game is starting up (= 0)
+                if (world.levelTransitionDirection >= 0) {
+                    world.player.worldPos[0] = Integer.parseInt(args[0]);
+                    world.player.worldPos[1] = Integer.parseInt(args[1]);
+                    world.player.facing = Direction.stringToEnum(args[2]);
+                }
+                // coming from a room with a higher ID
+                else if (world.levelTransitionDirection < 0) {
+                    world.player.worldPos[0] = Integer.parseInt(args[3]);
+                    world.player.worldPos[1] = Integer.parseInt(args[4]);
+                    world.player.facing = Direction.stringToEnum(args[5]);
+                }
             }
             else if (state == LoadingState.OBJECT) {
                 WorldObjectType objectType = WorldObjectType.stringToEnum(args[0]);

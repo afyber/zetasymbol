@@ -1,0 +1,8 @@
+tiles
+0, 0, NE_INNER
+collisions
+0, 0, 16, 16
+player
+100, 140, DOWN
+objects
+LEVEL_TRANSITION, 0, 0, 160, 160, -1

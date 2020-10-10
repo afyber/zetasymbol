@@ -29,7 +29,7 @@ Each world object has a different format for creating them, which will be gone o
 ### Level Transitions
 Level transitions change the game's currently loaded level by the amount specified when the player collides with them (the amount is added to the current `levelID`).
 The format for level transitions are the same as for collisions:
-`x pos, y pos, width, height`
+`x pos, y pos, width, height, direction`
 
 ### Decor Objects
 Decor (decoration) objects are sprites in the world. They can be collidable or not. Their sprite is determined by the coordinates given and the current decor spritesheet.

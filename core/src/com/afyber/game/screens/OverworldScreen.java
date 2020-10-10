@@ -48,10 +48,12 @@ public class OverworldScreen extends MyScreenAdapter {
     public void update() {
         world.update();
         if (world.levelTransitionDirection != 0) {
+            int tempDirection = world.levelTransitionDirection;
             currentLevelID += world.levelTransitionDirection;
-            world.levelTransitionDirection = 0;
             world = new Overworld();
+            world.levelTransitionDirection = tempDirection;
             LoadSave.load(world, currentLevelID, 0);
+            world.levelTransitionDirection = 0;
         }
         if (world.currentEncounterID != -1) {
             game.setScreen(new BattleScreen(game, world.currentEncounterID, 0));
