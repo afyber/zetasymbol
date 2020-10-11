@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Rythm {
@@ -39,6 +38,8 @@ public class Rythm {
     TextureRegion note;
     Animation<TextureRegion> hitNoteAnim;
     float hitNoteAnimTime;
+    Animation<TextureRegion> missNoteAnim;
+    float missNoteAnimTime;
 
     // this is the only use of a list in the entire project and it's just because I want to be able to use add()
     // (aka because I'm lazy)
@@ -54,7 +55,7 @@ public class Rythm {
             int dataToDraw = noteData[currentMeasureNum + (currentBeatNum + i >= 4 ? 1 : 0)][(currentBeatNum + i) % timeSigTop];
             if (dataToDraw > 0) {
                 if (i == 0 && deltaFromBeat >= 0) {
-                    batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 26f + (dataToDraw - 1) * 50, 60);
+                    batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
                     hitNoteAnimTime += Gdx.graphics.getDeltaTime();
                 } else {
                     batch.draw(note, 30f + (dataToDraw - 1) * 50, 60 + ((i - deltaFromBeat) * 30f));
@@ -147,9 +148,15 @@ public class Rythm {
                 new TextureRegion(spriteSheet, 0, 5, 11, 5),
                 new TextureRegion(spriteSheet, 11, 5, 11, 5),
                 new TextureRegion(spriteSheet, 22, 5, 11, 5),
-                new TextureRegion(spriteSheet, 33, 5, 11, 5),
-                new TextureRegion(spriteSheet, 44, 5, 11, 5)
+                new TextureRegion(spriteSheet, 33, 5, 11, 5)
         };
         hitNoteAnim = new Animation<>(0.075f, hitFrames);
+
+        TextureRegion[] missFrames = new TextureRegion[]{
+                new TextureRegion(spriteSheet, 0, 10, 11, 5),
+                new TextureRegion(spriteSheet, 11, 10, 11, 5),
+                new TextureRegion(spriteSheet, 22, 10, 11, 5),
+        };
+        missNoteAnim = new Animation<>(0.15f, missFrames);
     }
 }
