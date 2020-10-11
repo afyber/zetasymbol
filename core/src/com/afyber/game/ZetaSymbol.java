@@ -10,6 +10,8 @@ public class ZetaSymbol extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
 
+	public static boolean debug = true;
+
 	// each index corresponds to a button
 	// true means the button is currently being held down
 	// 0: Left

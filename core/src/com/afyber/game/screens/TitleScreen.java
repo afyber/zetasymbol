@@ -26,7 +26,7 @@ public class TitleScreen extends MyScreenAdapter {
 
         game.font.draw(game.batch, ZetaSymbol.WINDOW_TITLE, 50f, 100f);
 
-        game.font.draw(game.batch, String.format("calibration: %.03fms", ZetaSymbol.calibration), 16, 32);
+        game.font.draw(game.batch, String.format("calibration: %.03f sec", ZetaSymbol.calibration), 10, 32);
 
         game.batch.end();
 

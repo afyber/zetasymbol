@@ -64,14 +64,18 @@ public class BattleScreen extends MyScreenAdapter {
 
         gui.drawRect(64, 156, 32, 2, game.batch);
 
-        game.font.draw(game.batch, String.valueOf(rythm.noteData[rythm.currentMeasureNum][rythm.currentBeatNum]), 50, 50);
+        if (ZetaSymbol.debug) {
+            game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
+            game.font.draw(game.batch, String.valueOf(rythm.deltaFromBeat), 0, 32);
 
-        game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
-        game.font.draw(game.batch, String.valueOf(rythm.deltaFromBeat), 0, 32);
+            game.font.draw(game.batch, "B" + battleState, 112, 16);
+            game.font.draw(game.batch, "M" + musicState, 112, 32);
+            game.font.draw(game.batch, "MH" + monsterHealth, 0, 96);
+        }
 
-        game.font.draw(game.batch, "B" + battleState, 112, 16);
-        game.font.draw(game.batch, "M" + musicState, 112, 32);
-        game.font.draw(game.batch, "MH" + monsterHealth, 0, 96);
+        if (musicState == 1) {
+            rythm.draw(game.batch);
+        }
 
         game.batch.end();
 
