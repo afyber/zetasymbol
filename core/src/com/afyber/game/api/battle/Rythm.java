@@ -3,8 +3,11 @@ package com.afyber.game.api.battle;
 import com.afyber.game.ZetaSymbol;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Rythm {
@@ -29,10 +32,13 @@ public class Rythm {
     // 0: no note
     // 1: "A" note
     // 2: "B" note
-    // 3: "C" note?
+    // 3: "C" note
     public int[][] noteData;
 
-    Texture square = new Texture(Gdx.files.internal("square.png"));
+    Texture spriteSheet;
+    TextureRegion note;
+    Animation<TextureRegion> hitNoteAnim;
+    float hitNoteAnimTime;
 
     // this is the only use of a list in the entire project and it's just because I want to be able to use add()
     // (aka because I'm lazy)
@@ -40,26 +46,19 @@ public class Rythm {
     public ArrayList<HitRating> ratings;
 
     public Rythm() {
+        setupTextures();
     }
 
     public void draw(SpriteBatch batch) {
         for (int i = 0; i < 4; i++) {
             int dataToDraw = noteData[currentMeasureNum + (currentBeatNum + i >= 4 ? 1 : 0)][(currentBeatNum + i) % timeSigTop];
-            int x = -10;
-            if (dataToDraw == 1) {
-                x = 30;
-            }
-            else if (dataToDraw == 2) {
-                x = 80;
-            }
-            else if (dataToDraw == 3) {
-                x = 130;
-            }
-            if (i == 0 && deltaFromBeat >= 0) {
-                batch.draw(square, x, 60);
-            }
-            else {
-                batch.draw(square, x, 60 + ((i - deltaFromBeat) * 30f));
+            if (dataToDraw > 0) {
+                if (i == 0 && deltaFromBeat >= 0) {
+                    batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 26f + (dataToDraw - 1) * 50, 60);
+                    hitNoteAnimTime += Gdx.graphics.getDeltaTime();
+                } else {
+                    batch.draw(note, 30f + (dataToDraw - 1) * 50, 60 + ((i - deltaFromBeat) * 30f));
+                }
             }
         }
     }
@@ -76,6 +75,7 @@ public class Rythm {
 
             if (currentBeat != currentBeatNum) {
                 triedToHit = false;
+                hitNoteAnimTime = 0;
             }
 
             if ((ZetaSymbol.input[4] || ZetaSymbol.input[5] || ZetaSymbol.input[6]) && !previewing) {
@@ -136,5 +136,20 @@ public class Rythm {
         posInSong = 0;
         ratings.clear();
         playing = true;
+    }
+
+    private void setupTextures() {
+        spriteSheet = new Texture(Gdx.files.internal("battle spritesheet.png"));
+
+        note = new TextureRegion(spriteSheet, 0, 0, 5, 5);
+
+        TextureRegion[] hitFrames = new TextureRegion[]{
+                new TextureRegion(spriteSheet, 0, 5, 11, 5),
+                new TextureRegion(spriteSheet, 11, 5, 11, 5),
+                new TextureRegion(spriteSheet, 22, 5, 11, 5),
+                new TextureRegion(spriteSheet, 33, 5, 11, 5),
+                new TextureRegion(spriteSheet, 44, 5, 11, 5)
+        };
+        hitNoteAnim = new Animation<>(0.075f, hitFrames);
     }
 }
