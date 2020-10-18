@@ -21,7 +21,7 @@ public class Rythm {
     public int currentMeasureNum;
     public int currentBeatNum;
     public float deltaFromBeat;
-    private boolean triedToHit;
+    private int hitStatus;
 
     public int timeSigTop;
 
@@ -55,9 +55,16 @@ public class Rythm {
             int dataToDraw = noteData[currentMeasureNum + (currentBeatNum + i >= 4 ? 1 : 0)][(currentBeatNum + i) % timeSigTop];
             if (dataToDraw > 0) {
                 if (i == 0 && deltaFromBeat >= 0) {
-                    batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
-                    hitNoteAnimTime += Gdx.graphics.getDeltaTime();
-                } else {
+                    if (hitStatus == 1) {
+                        batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
+                        hitNoteAnimTime += Gdx.graphics.getDeltaTime();
+                    }
+                    else {
+                        batch.draw(missNoteAnim.getKeyFrame(missNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
+                        missNoteAnimTime += Gdx.graphics.getDeltaTime();
+                    }
+                }
+                else {
                     batch.draw(note, 30f + (dataToDraw - 1) * 50, 60 + ((i - deltaFromBeat) * 30f));
                 }
             }
@@ -75,8 +82,9 @@ public class Rythm {
             deltaFromBeat = ((posInSong + (secsPerBeat / 2) + ZetaSymbol.calibration) % secsPerBeat - (secsPerBeat / 2)) / secsPerBeat;
 
             if (currentBeat != currentBeatNum) {
-                triedToHit = false;
+                hitStatus = 0;
                 hitNoteAnimTime = 0;
+                missNoteAnimTime = 0;
             }
 
             if ((ZetaSymbol.input[4] || ZetaSymbol.input[5] || ZetaSymbol.input[6]) && !previewing) {
@@ -87,7 +95,8 @@ public class Rythm {
     }
 
     public void attemptHit() {
-        if (!triedToHit) {
+        if (hitStatus == 0) {
+            hitStatus = 1;
             if (ZetaSymbol.input[4] && noteData[currentMeasureNum][currentBeatNum] == 1 &&
                 !ZetaSymbol.input[5] && !ZetaSymbol.input[6]) {
                 gradeHit();
@@ -103,7 +112,6 @@ public class Rythm {
             else {
                 System.out.println("Wrong note.");
             }
-            triedToHit = true;
         }
     }
 
@@ -129,6 +137,7 @@ public class Rythm {
         else {
             System.out.println("Miss.");
             ratings.add(HitRating.MISS);
+            hitStatus = 2;
         }
         System.out.println(deltaFromBeat);
     }
@@ -148,7 +157,8 @@ public class Rythm {
                 new TextureRegion(spriteSheet, 0, 5, 11, 5),
                 new TextureRegion(spriteSheet, 11, 5, 11, 5),
                 new TextureRegion(spriteSheet, 22, 5, 11, 5),
-                new TextureRegion(spriteSheet, 33, 5, 11, 5)
+                new TextureRegion(spriteSheet, 33, 5, 11, 5),
+                new TextureRegion(spriteSheet, 44, 5, 11, 5)
         };
         hitNoteAnim = new Animation<>(0.075f, hitFrames);
 
@@ -156,7 +166,8 @@ public class Rythm {
                 new TextureRegion(spriteSheet, 0, 10, 11, 5),
                 new TextureRegion(spriteSheet, 11, 10, 11, 5),
                 new TextureRegion(spriteSheet, 22, 10, 11, 5),
+                new TextureRegion(spriteSheet, 33, 10, 11, 5)
         };
-        missNoteAnim = new Animation<>(0.15f, missFrames);
+        missNoteAnim = new Animation<>(0.085f, missFrames);
     }
 }
