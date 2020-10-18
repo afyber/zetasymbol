@@ -45,4 +45,8 @@ public class GUI {
             batch.draw(square, x2, y, outlineThickness, outlineThickness);
         }
     }
+
+    public void dispose() {
+        square.dispose();
+    }
 }

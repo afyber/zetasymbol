@@ -31,8 +31,8 @@ public class BattleScreen extends MyScreenAdapter {
     // 3: The monster is taking damage
     // back to 0 unless the monster is dead
     public int battleState;
-    // 0: Continue
-    // 1: Item
+    // 0: Fight
+    // 1: Run
     public int menuPos;
     // 0: Has not played this turn
     // 1: Is playing
@@ -154,5 +154,11 @@ public class BattleScreen extends MyScreenAdapter {
 
     private void exitBattle() {
         game.setScreen(game.overworld);
+    }
+
+    public void dispose() {
+        rythm.dispose();
+        music.dispose();
+        gui.dispose();
     }
 }

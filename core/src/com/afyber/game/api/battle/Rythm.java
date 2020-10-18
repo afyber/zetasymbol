@@ -178,4 +178,8 @@ public class Rythm {
         };
         missNoteAnim = new Animation<>(0.085f, missFrames);
     }
+
+    public void dispose() {
+        spriteSheet.dispose();
+    }
 }
