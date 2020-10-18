@@ -34,6 +34,8 @@ public class Rythm {
     // 3: "C" note
     public int[][] noteData;
 
+    public int intrumentType = 0;
+
     Texture spriteSheet;
     TextureRegion note;
     Animation<TextureRegion> hitNoteAnim;
@@ -55,17 +57,17 @@ public class Rythm {
             int dataToDraw = noteData[currentMeasureNum + (currentBeatNum + i >= 4 ? 1 : 0)][(currentBeatNum + i) % timeSigTop];
             if (dataToDraw > 0) {
                 if (i == 0 && deltaFromBeat >= 0) {
-                    if (hitStatus == 1) {
-                        batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
+                    if (hitStatus == 1 || previewing) {
+                        batch.draw(hitNoteAnim.getKeyFrame(hitNoteAnimTime), 25f + (dataToDraw - 1) * 50, 60);
                         hitNoteAnimTime += Gdx.graphics.getDeltaTime();
                     }
                     else {
-                        batch.draw(missNoteAnim.getKeyFrame(missNoteAnimTime), 27f + (dataToDraw - 1) * 50, 60);
+                        batch.draw(missNoteAnim.getKeyFrame(missNoteAnimTime), 25f + (dataToDraw - 1) * 50, 60);
                         missNoteAnimTime += Gdx.graphics.getDeltaTime();
                     }
                 }
                 else {
-                    batch.draw(note, 30f + (dataToDraw - 1) * 50, 60 + ((i - deltaFromBeat) * 30f));
+                    batch.draw(note, 28f + (dataToDraw - 1) * 50, 60 + ((i - deltaFromBeat) * 30f));
                 }
             }
         }
@@ -97,17 +99,23 @@ public class Rythm {
     public void attemptHit() {
         if (hitStatus == 0) {
             hitStatus = 1;
-            if (ZetaSymbol.input[4] && noteData[currentMeasureNum][currentBeatNum] == 1 &&
-                !ZetaSymbol.input[5] && !ZetaSymbol.input[6]) {
-                gradeHit();
+            if (ZetaSymbol.input[4] && !ZetaSymbol.input[5] && !ZetaSymbol.input[6]) {
+                if (noteData[currentMeasureNum][currentBeatNum] == 1 && (intrumentType == 0 || intrumentType == 1)) {
+                    gradeHit();
+                }
             }
-            else if (ZetaSymbol.input[5] && noteData[currentMeasureNum][currentBeatNum] == 2 &&
-                    !ZetaSymbol.input[4] && !ZetaSymbol.input[6]) {
-                gradeHit();
+            else if (ZetaSymbol.input[5] && !ZetaSymbol.input[4] && !ZetaSymbol.input[6]) {
+                if (noteData[currentMeasureNum][currentBeatNum] == 2 && intrumentType == 1) {
+                    gradeHit();
+                }
+                else if (noteData[currentMeasureNum][currentBeatNum] == 3 && intrumentType == 0) {
+                    gradeHit();
+                }
             }
-            else if (ZetaSymbol.input[6] && noteData[currentMeasureNum][currentBeatNum] == 3 &&
-                    !ZetaSymbol.input[4] && !ZetaSymbol.input[5]) {
-                gradeHit();
+            else if (ZetaSymbol.input[6] && !ZetaSymbol.input[4] && !ZetaSymbol.input[5]) {
+                if (noteData[currentMeasureNum][currentBeatNum] == 3 && (intrumentType == 0 || intrumentType == 1)) {
+                    gradeHit();
+                }
             }
             else {
                 System.out.println("Wrong note.");

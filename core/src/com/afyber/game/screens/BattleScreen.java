@@ -62,7 +62,7 @@ public class BattleScreen extends MyScreenAdapter {
 
         game.batch.begin();
 
-        gui.drawRect(64, 156, 32, 2, game.batch);
+        gui.drawRect(game.batch, 64, 156, 32, 2);
 
         if (ZetaSymbol.debug) {
             game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
@@ -75,6 +75,17 @@ public class BattleScreen extends MyScreenAdapter {
 
         if (musicState == 1) {
             rythm.draw(game.batch);
+            for (int i = 0; i < 3; i++) {
+                if (rythm.intrumentType == 0 || rythm.intrumentType == 1) {
+                    gui.drawRect(game.batch, 28, 32, 62 + i * 30, 62 + i * 30, 1);
+                }
+                if (rythm.intrumentType == 1) {
+                    gui.drawRect(game.batch, 78, 82, 62 + i * 30, 62 + i * 30, 1);
+                }
+                if (rythm.intrumentType == 0 || rythm.intrumentType == 1) {
+                    gui.drawRect(game.batch, 128, 132, 62 + i * 30, 62 + i * 30, 1);
+                }
+            }
         }
 
         game.batch.end();

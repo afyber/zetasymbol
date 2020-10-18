@@ -116,6 +116,7 @@ public class LoadSave {
                 current.timeSigTop = Integer.parseInt(args[1]);
                 current.usesEighths = Boolean.getBoolean(args[2]);
                 current.noteData = new int[100][];
+                current.intrumentType = Integer.parseInt(args[3]);
             }
             else {
                 String[] args = line.replace("|", "").split(" ");
