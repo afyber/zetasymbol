@@ -3,13 +3,18 @@ package com.afyber.game.api.battle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class GUI {
 
     private Texture square;
+    private Texture spriteSheet;
+    private TextureRegion selection;
 
     public GUI() {
         square = new Texture(Gdx.files.internal("square.png"));
+        spriteSheet = new Texture(Gdx.files.internal("battle spritesheet.png"));
+        selection = new TextureRegion(spriteSheet, 0, 0, 5, 5);
     }
 
     /**
@@ -44,6 +49,10 @@ public class GUI {
             batch.draw(square, x1, y, outlineThickness, outlineThickness);
             batch.draw(square, x2, y, outlineThickness, outlineThickness);
         }
+    }
+
+    public void drawSelector(SpriteBatch batch, float x, float y) {
+        batch.draw(selection, x, y);
     }
 
     public void dispose() {

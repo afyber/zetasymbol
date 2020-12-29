@@ -62,9 +62,8 @@ public class BattleScreen extends MyScreenAdapter {
 
         game.batch.begin();
 
-        gui.drawRect(game.batch, 64, 156, 32, 2);
 
-        if (ZetaSymbol.debug) {
+        if (ZetaSymbol.DEBUG) {
             game.font.draw(game.batch, String.valueOf(rythm.currentBeatNum), 0, 16);
             game.font.draw(game.batch, String.valueOf(rythm.deltaFromBeat), 0, 32);
 
@@ -73,7 +72,11 @@ public class BattleScreen extends MyScreenAdapter {
             game.font.draw(game.batch, "MH" + monsterHealth, 0, 96);
         }
 
-        if (musicState == 1) {
+        if (musicState == 0) {
+            gui.drawSelector(game.batch, 69, 10 + (menuPos * 17));
+            gui.drawRect(game.batch, 64, 156, 38, 2);
+        }
+        else if (musicState == 1) {
             rythm.draw(game.batch);
             for (int i = 0; i < 3; i++) {
                 if (rythm.intrumentType == 0 || rythm.intrumentType == 1) {
@@ -94,10 +97,34 @@ public class BattleScreen extends MyScreenAdapter {
     }
 
     public void update(float delta) {
+        ZetaSymbol.input.update();
+
         switch (battleState) {
             case 0:
-                if (ZetaSymbol.input[4]) {
-                    battleState = 1;
+                if (ZetaSymbol.input.keyJustPressed(4)) {
+                    if (menuPos == 0) {
+                        battleState = 1;
+                    }
+                    else if (menuPos == 1) {
+                        if (Math.random() * 100 > 67) {
+                            exitBattle();
+                        }
+                        else {
+                            battleState = 1;
+                        }
+                    }
+                }
+                if (ZetaSymbol.input.keyJustPressed(3)) {
+                    menuPos += 1;
+                }
+                if (ZetaSymbol.input.keyJustPressed(2)) {
+                    menuPos -= 1;
+                }
+                if (menuPos > 1) {
+                    menuPos = 0;
+                }
+                else if (menuPos < 0) {
+                    menuPos = 1;
                 }
                 break;
             case 1:

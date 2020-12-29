@@ -17,7 +17,6 @@ public class Overworld {
     // general objects, can be collidable or not, this could get very confusing
     public WorldObject[] worldObjects;
 
-    // TODO: battle system
     public int[] monsterEncounterIDs;
     public int framesSinceLastEncounter;
 

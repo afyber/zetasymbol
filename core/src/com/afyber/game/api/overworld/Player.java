@@ -43,28 +43,28 @@ public class Player extends WorldObject {
     }
 
     public void update(Overworld world) {
-        if (ZetaSymbol.input[0]) {
+        if (ZetaSymbol.input.isKeyDown(0)) {
             worldPos[0] -= 0.5;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[0] += 0.5;
             }
             facing = Direction.LEFT;
         }
-        if (ZetaSymbol.input[1]) {
+        if (ZetaSymbol.input.isKeyDown(1)) {
             worldPos[0] += 0.5;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[0] -= 0.5;
             }
             facing = Direction.RIGHT;
         }
-        if (ZetaSymbol.input[2]) {
+        if (ZetaSymbol.input.isKeyDown(2)) {
             worldPos[1] += 0.5;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[1] -= 0.5;
             }
             facing = Direction.UP;
         }
-        if (ZetaSymbol.input[3]) {
+        if (ZetaSymbol.input.isKeyDown(3)) {
             worldPos[1] -= 0.5;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
                 worldPos[1] += 0.5;
@@ -73,7 +73,8 @@ public class Player extends WorldObject {
         }
 
         // this whole thing is dumb
-        if (ZetaSymbol.input[0] || ZetaSymbol.input[1] || ZetaSymbol.input[2] || ZetaSymbol.input[3]) {
+        if (ZetaSymbol.input.isKeyDown(0) || ZetaSymbol.input.isKeyDown(1) ||
+                ZetaSymbol.input.isKeyDown(2) || ZetaSymbol.input.isKeyDown(3)) {
             isWalkingFrames += 1;
             if (isWalkingFrames > 59) {
                 isWalkingFrames = 0;

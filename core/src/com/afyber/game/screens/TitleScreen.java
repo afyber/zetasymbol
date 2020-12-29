@@ -11,8 +11,6 @@ public class TitleScreen extends MyScreenAdapter {
         super(game);
 
         setupScreen();
-
-        Gdx.input.setInputProcessor(ZetaSymbol.handler);
     }
 
     @Override
@@ -34,13 +32,15 @@ public class TitleScreen extends MyScreenAdapter {
     }
 
     public void update(float delta) {
-        if (ZetaSymbol.input[4]) {
+        ZetaSymbol.input.update();
+
+        if (ZetaSymbol.input.isKeyDown(4)) {
             game.setScreen(new OverworldScreen(game));
         }
-        if (ZetaSymbol.input[0]) {
+        if (ZetaSymbol.input.isKeyDown(0)) {
             ZetaSymbol.calibration -= 0.001f;
         }
-        if (ZetaSymbol.input[1]) {
+        if (ZetaSymbol.input.isKeyDown(1)) {
             ZetaSymbol.calibration += 0.001f;
         }
     }

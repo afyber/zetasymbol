@@ -46,7 +46,10 @@ public class OverworldScreen extends MyScreenAdapter {
     }
 
     public void update() {
+        ZetaSymbol.input.update();
+
         world.update();
+
         if (world.levelTransitionDirection != 0) {
             int tempDirection = world.levelTransitionDirection;
             currentLevelID += world.levelTransitionDirection;
@@ -55,6 +58,7 @@ public class OverworldScreen extends MyScreenAdapter {
             LoadSave.load(world, currentLevelID, 0);
             world.levelTransitionDirection = 0;
         }
+
         if (world.currentEncounterID != -1) {
             game.setScreen(new BattleScreen(game, world.currentEncounterID, 0));
             game.overworld = this;

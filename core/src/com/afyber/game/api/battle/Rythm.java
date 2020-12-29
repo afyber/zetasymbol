@@ -89,7 +89,7 @@ public class Rythm {
                 missNoteAnimTime = 0;
             }
 
-            if ((ZetaSymbol.input[4] || ZetaSymbol.input[5] || ZetaSymbol.input[6]) && !previewing) {
+            if ((ZetaSymbol.input.isKeyDown(4) || ZetaSymbol.input.isKeyDown(5) || ZetaSymbol.input.isKeyDown(6)) && !previewing) {
                 attemptHit();
             }
         }
@@ -99,20 +99,20 @@ public class Rythm {
     public void attemptHit() {
         if (hitStatus == 0) {
             hitStatus = 1;
-            if (ZetaSymbol.input[4] && !ZetaSymbol.input[5] && !ZetaSymbol.input[6]) {
+            if (ZetaSymbol.input.isKeyDown(4) && !ZetaSymbol.input.isKeyDown(5) && !ZetaSymbol.input.isKeyDown(6)) {
                 if (noteData[currentMeasureNum][currentBeatNum] == 1 && (intrumentType == 0 || intrumentType == 1)) {
                     gradeHit();
                 }
             }
-            else if (ZetaSymbol.input[5] && !ZetaSymbol.input[4] && !ZetaSymbol.input[6]) {
+            else if (ZetaSymbol.input.isKeyDown(5) && !ZetaSymbol.input.isKeyDown(4) && !ZetaSymbol.input.isKeyDown(6)) {
                 if (noteData[currentMeasureNum][currentBeatNum] == 2 && intrumentType == 1) {
                     gradeHit();
                 }
-                else if (noteData[currentMeasureNum][currentBeatNum] == 3 && intrumentType == 0) {
+                if (noteData[currentMeasureNum][currentBeatNum] == 3 && intrumentType == 0) {
                     gradeHit();
                 }
             }
-            else if (ZetaSymbol.input[6] && !ZetaSymbol.input[4] && !ZetaSymbol.input[5]) {
+            else if (ZetaSymbol.input.isKeyDown(6) && !ZetaSymbol.input.isKeyDown(4) && !ZetaSymbol.input.isKeyDown(5)) {
                 if (noteData[currentMeasureNum][currentBeatNum] == 3 && (intrumentType == 0 || intrumentType == 1)) {
                     gradeHit();
                 }

@@ -6,24 +6,16 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.afyber.game.screens.*;
 
+// this project is so hacked and bodged you wouldn't believe some of it
+
 public class ZetaSymbol extends Game {
 	public SpriteBatch batch;
 	public BitmapFont font;
 
-	public static boolean debug = true;
+	public static final boolean DEBUG = true;
 
-	// each index corresponds to a button
-	// true means the button is currently being held down
-	// 0: Left
-	// 1: Right
-	// 2: Up
-	// 3: Down
-	// 4: A
-	// 5: B
-	// 6: Pause/Start
-	public static boolean[] input;
 	// and yes I do realise there's a lot of static variables ok
-	public static InputHandling handler;
+	public static InputHandling input;
 
 	// just for use globally to store the overworld in-between battles
 	public OverworldScreen overworld;
@@ -43,8 +35,7 @@ public class ZetaSymbol extends Game {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 
-		input = new boolean[7];
-		handler = new InputHandling();
+		input = new InputHandling();
 
 		setScreen(new TitleScreen(this));
 	}
