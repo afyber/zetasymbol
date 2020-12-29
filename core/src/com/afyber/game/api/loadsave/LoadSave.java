@@ -7,6 +7,7 @@ import com.afyber.game.api.overworld.*;
 import com.afyber.game.screens.BattleScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 
 import java.util.ArrayList;
 
@@ -159,6 +160,7 @@ public class LoadSave {
         screen.monsterHealth = Integer.parseInt(args[0]);
         screen.monsterDef = Integer.parseInt(args[1]);
         screen.monsterMaxHealth = Integer.parseInt(args[2]);
+        screen.monsterTexture = new Texture(Gdx.files.internal("monsters/" + args[3]));
     }
 
     public static void save(Overworld world) {

@@ -9,6 +9,7 @@ import com.afyber.game.api.loadsave.LoadSave;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class BattleScreen extends MyScreenAdapter {
     public int monsterHealth;
     public int monsterMaxHealth;
     public int monsterDef;
+    public Texture monsterTexture;
 
     // What's happening in the battle
     // start
@@ -72,9 +74,13 @@ public class BattleScreen extends MyScreenAdapter {
             game.font.draw(game.batch, "MH" + monsterHealth, 0, 96);
         }
 
+        game.batch.draw(monsterTexture, 80 - monsterTexture.getWidth() * 2f, 134 - monsterTexture.getHeight() * 4f, monsterTexture.getWidth() * 4f, monsterTexture.getHeight() * 4f);
+
         if (musicState == 0) {
-            gui.drawSelector(game.batch, 69, 10 + (menuPos * 17));
+            gui.drawSelector(game.batch, 69, 27 + (-menuPos * 17));
             gui.drawRect(game.batch, 64, 156, 38, 2);
+            game.font.draw(game.batch, "Run", 76, 18);
+            game.font.draw(game.batch, "Fight", 76, 35);
         }
         else if (musicState == 1) {
             rythm.draw(game.batch);
@@ -187,5 +193,6 @@ public class BattleScreen extends MyScreenAdapter {
         rythm.dispose();
         music.dispose();
         gui.dispose();
+        monsterTexture.dispose();
     }
 }

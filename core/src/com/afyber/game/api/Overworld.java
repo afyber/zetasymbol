@@ -67,7 +67,7 @@ public class Overworld {
     public void update() {
         player.update(this);
         framesSinceLastEncounter += 1;
-        if (player.walking && framesSinceLastEncounter >= 420) {
+        if (player.walking && framesSinceLastEncounter >= 360) {
             if (Math.random() * 100 > 99.69) {
                 System.out.println("Encounter");
                 currentEncounterID = monsterEncounterIDs[(int)(System.currentTimeMillis() % monsterEncounterIDs.length)];
@@ -90,7 +90,7 @@ public class Overworld {
                 // I hate myself for this, like, does this even work?
                 // surprisingly it does, but I'm very unhappy with it
                 // basically it checks if the object extends Collision
-                // then if it does casts it to collision *throws up* to use the isColliding function
+                // then if it does casts it to collision to use the isColliding function
                 if (Collision.class.isAssignableFrom(object.getClass())) {
                     if (((Collision) object).isColliding(x, y, width, height)) {
                         return true;
