@@ -4,6 +4,7 @@ import com.afyber.game.ZetaSymbol;
 import com.afyber.game.api.loadsave.LoadSave;
 import com.afyber.game.api.MyScreenAdapter;
 import com.afyber.game.api.Overworld;
+import com.afyber.game.api.overworld.AreaColor;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
@@ -15,13 +16,13 @@ public class OverworldScreen extends MyScreenAdapter {
     int currentAreaID;
 
     public OverworldScreen(ZetaSymbol game) {
-        this(game, 0);
+        this(game, 0, 0);
     }
-    public OverworldScreen(ZetaSymbol game, int levelID) {
+    public OverworldScreen(ZetaSymbol game, int levelID, int areaID) {
         super(game);
 
         currentLevelID = levelID;
-        currentAreaID = 0;
+        currentAreaID = areaID;
         world = new Overworld();
         LoadSave.load(world, currentLevelID, currentAreaID);
 
@@ -30,8 +31,8 @@ public class OverworldScreen extends MyScreenAdapter {
 
     @Override
     public void render(float delta) {
-        // there's no need for a one-color floor tile if the clear color is the same color as the tile :)
-        Gdx.gl.glClearColor(0.031f, 0.102f, 0.047f, 1f);
+        AreaColor areaEnum = AreaColor.idToEnum(currentAreaID);
+        Gdx.gl.glClearColor(areaEnum.getRed(), areaEnum.getGreen(), areaEnum.getBlue(), 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         updateScreen();
