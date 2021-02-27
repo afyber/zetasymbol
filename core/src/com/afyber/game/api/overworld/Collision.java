@@ -14,7 +14,7 @@ public class Collision extends WorldObject {
     }
 
     @Override
-    public void render(SpriteBatch batch, int cameraX, int cameraY) {
+    public void render(SpriteBatch batch, float cameraX, float cameraY) {
         // none
     }
 

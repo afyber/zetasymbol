@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.afyber.game.screens.*;
 
 // this project is so hacked and bodged you wouldn't believe some of it
+// In fact I'm pretty sure it would be impossible to make this into a full game without huge refactoring
+// so here's a "demo", I guess.
 
 public class ZetaSymbol extends Game {
 	public SpriteBatch batch;
@@ -28,7 +30,7 @@ public class ZetaSymbol extends Game {
 	public static final String WINDOW_TITLE = "zetasymbol";
 
 	// you are now in static variable land
-	public static float calibration = -0.1f;
+	public static float calibration = -0.11f;
 	
 	@Override
 	public void create () {

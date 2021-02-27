@@ -16,7 +16,7 @@ public enum TileDirection {
     EMPTY;
 
     public static TileDirection stringToEnum(String string) {
-        switch (string) {
+        switch (string.toUpperCase()) {
             case "WEST":
                 return TileDirection.WEST;
             case "EAST":

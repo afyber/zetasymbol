@@ -26,6 +26,8 @@ public class Overworld {
 
     public Player player;
 
+    private float[] cameraPos;
+
     public static Texture tileSet;
     public static Texture decorSet;
 
@@ -39,6 +41,8 @@ public class Overworld {
         framesSinceLastEncounter = 0;
         currentEncounterID = -1;
 
+        cameraPos = new float[2];
+
         player = new Player(0, 0);
     }
 
@@ -46,22 +50,22 @@ public class Overworld {
         for (Tile tile:
              tiles) {
             if (tile != null && tile.sprite != null) {
-                tile.render(batch, 0, 0);
+                tile.render(batch, cameraPos[0], cameraPos[1]);
             }
         }
         for (Collision collision:
              collisions) {
             if (collision != null) {
-                collision.render(batch, 0, 0);
+                collision.render(batch, cameraPos[0], cameraPos[1]);
             }
         }
         for (WorldObject object:
              worldObjects) {
             if (object != null) {
-                object.render(batch, 0, 0);
+                object.render(batch, cameraPos[0], cameraPos[1]);
             }
         }
-        player.render(batch, 0, 0);
+        player.render(batch, cameraPos[0], cameraPos[1]);
     }
 
     public void update() {
@@ -73,6 +77,8 @@ public class Overworld {
                 currentEncounterID = monsterEncounterIDs[(int)(System.currentTimeMillis() % monsterEncounterIDs.length)];
             }
         }
+        cameraPos[0] = player.worldPos[0] - 75;
+        cameraPos[1] = player.worldPos[1] - 67;
     }
 
     public boolean collidedWithWorld(float x, float y, float width, float height) {

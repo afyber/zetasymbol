@@ -44,30 +44,30 @@ public class Player extends WorldObject {
 
     public void update(Overworld world) {
         if (ZetaSymbol.input.isKeyDown(0)) {
-            worldPos[0] -= 0.5;
+            worldPos[0] -= 0.75;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
-                worldPos[0] += 0.5;
+                worldPos[0] += 0.75;
             }
             facing = Direction.LEFT;
         }
         if (ZetaSymbol.input.isKeyDown(1)) {
-            worldPos[0] += 0.5;
+            worldPos[0] += 0.75;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
-                worldPos[0] -= 0.5;
+                worldPos[0] -= 0.75;
             }
             facing = Direction.RIGHT;
         }
         if (ZetaSymbol.input.isKeyDown(2)) {
-            worldPos[1] += 0.5;
+            worldPos[1] += 0.75;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
-                worldPos[1] -= 0.5;
+                worldPos[1] -= 0.75;
             }
             facing = Direction.UP;
         }
         if (ZetaSymbol.input.isKeyDown(3)) {
-            worldPos[1] -= 0.5;
+            worldPos[1] -= 0.75;
             if (world.collidedWithWorld(worldPos[0], worldPos[1], 10, 11)) {
-                worldPos[1] += 0.5;
+                worldPos[1] += 0.75;
             }
             facing = Direction.DOWN;
         }

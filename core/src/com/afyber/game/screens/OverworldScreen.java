@@ -26,6 +26,9 @@ public class OverworldScreen extends MyScreenAdapter {
         world = new Overworld();
         LoadSave.load(world, currentLevelID, currentAreaID);
 
+        // this is to make sure the camera is centered on the player, otherwise there's one frame where it isn't
+        world.update();
+
         setupScreen();
     }
 

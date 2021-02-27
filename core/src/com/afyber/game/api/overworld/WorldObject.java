@@ -14,7 +14,7 @@ public class WorldObject {
         worldPos[1] = y;
     }
 
-    public void render(SpriteBatch batch, int cameraX, int cameraY) {
+    public void render(SpriteBatch batch, float cameraX, float cameraY) {
         batch.draw(sprite, this.worldPos[0] - cameraX, this.worldPos[1] - cameraY);
     }
 }

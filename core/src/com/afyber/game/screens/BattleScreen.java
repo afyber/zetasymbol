@@ -81,8 +81,7 @@ public class BattleScreen extends MyScreenAdapter {
             gui.drawRect(game.batch, 64, 156, 38, 2);
             game.font.draw(game.batch, "Run", 76, 18);
             game.font.draw(game.batch, "Fight", 76, 35);
-        }
-        else if (musicState == 1) {
+        } else if (musicState == 1) {
             rythm.draw(game.batch);
             for (int i = 0; i < 3; i++) {
                 if (rythm.intrumentType == 0 || rythm.intrumentType == 1) {
@@ -112,7 +111,7 @@ public class BattleScreen extends MyScreenAdapter {
                         battleState = 1;
                     }
                     else if (menuPos == 1) {
-                        if (Math.random() * 100 > 67) {
+                        if (Math.random() * 100 > 50 + ((float)monsterHealth / (float)monsterMaxHealth) * 30) {
                             exitBattle();
                         }
                         else {
